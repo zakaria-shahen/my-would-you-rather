@@ -3,6 +3,10 @@
 
 # Schema Project 
 App to learn Redux and more.. 
+- redux
+- react-redux
+- redux-thunk
+- react-router-dom
 
 
 ## Routers
@@ -46,8 +50,9 @@ const store = {
 2. REMOVE_QUESTION 
 
 - Starter 
-5. GET_USERS
-6. GET_QUESTIONS
+1. STARTER
+<!-- 1. GET_USERS
+2. GET_QUESTIONS -->
 
 - Authentication
 7. LOGIN

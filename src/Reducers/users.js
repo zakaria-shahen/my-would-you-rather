@@ -7,7 +7,7 @@ export function users(state = {}, action){
                 ...state,
                 [state.answer.id]: state.answer
             }
-        case reo
+        // case reo
         default:
             return state
     }
