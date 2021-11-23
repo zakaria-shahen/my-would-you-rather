@@ -3,15 +3,11 @@ export const LOGIN = "LOGIN",
 
 
 // loginInfo = {username, password}
-export function login(loginInfo) {
-    return {
-        type: LOGIN,
-        loginInfo
-    }
-}
+export const login = loginInfo => ({
+    type: LOGIN,
+    loginInfo
+})
 
-export function logout() {
-    return {
-        type: LOGOUT
-    }
-}
+export const logout = () => ({
+    type: LOGOUT
+})

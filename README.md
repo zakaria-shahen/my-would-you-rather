@@ -41,19 +41,26 @@ const store = {
 ```
 
 ## Action
-- Answer
+- Users
+1. LOAD_USERS
+2. soon
+   1. ADD_USERS
+   2. REMOVE_USERS
+  
+  
+- Question
+1. LOAD_QUESTIONS
+2. ADD_QUESTION 
+3. REMOVE_QUESTION 
+   
+- Authentication
+1. LOGIN
+2. LOGOUT
+
+- Share 
 1. ADD_ANSWER
 2. REMOVE_ANSWER
-   
-- Question
-1. ADD_QUESTION 
-2. REMOVE_QUESTION 
-
-- Starter 
-1. STARTER
-<!-- 1. GET_USERS
-2. GET_QUESTIONS -->
-
-- Authentication
-7. LOGIN
-8. LOGOUT
+3. addAnswer()
+4. removeAnswer()
+5. load()
+  
