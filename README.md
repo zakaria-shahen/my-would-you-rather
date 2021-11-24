@@ -18,7 +18,7 @@ App to learn Redux and more..
 - `/404`
 
 ## Components 
-- layout
+- navbar
 - 404 Not Found 
 - Login 
 - Home (Router-> LeaderBoard or Login)
