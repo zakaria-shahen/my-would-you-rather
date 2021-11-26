@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 
-const Navbar = props => {
+export const Navbar = props => {
     return (
         <nav>
             <ul>
