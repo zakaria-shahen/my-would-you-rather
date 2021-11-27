@@ -1,53 +1,40 @@
-import { connect } from 'react-redux'
-import { propTypes } from 'prop-types'
 import { useState } from 'react'
+import { connect } from 'react-redux'
+import { PropTypes } from 'prop-types'
+import { Questions } from './Questions'
 
 const LeaderBoard = props => {
 
-    const [questions, setQuestions] = useState({
-        unanswered: undefined,
-        questions: props.questions
-    })
+    const [filterBy, setFilterBy] = useState("unAnswer")
 
-    const [user, setUser] = useState(props.user)
-
-    const filterBy = (unanswered = true) => {
-
-        if ((unanswered === true && questions.unanswered === true)
-            || (unanswered === false && questions.unanswered === false)) {
+    const handleChangeFilter = event => {
+        const value = event.target.id
+        if (filterBy === value) {
             return
         }
 
-        const userAnswers = Object.keys(user.answers)
-
-        const filterQ = questions.getOwnPropertyNames().filter(qid => userAnswers.includes(qid))
-
-
+        setFilterBy(value)
     }
-
-    const orderByDate = (questions) => {
-
-    }
-
-
-    const handlerAnswered = () => filterBy(false)
 
     return (
-        <div>
+        <div class={"leaderBoard"}>
             <div>
                 <ul>
-                    <li onClick={handlerAnswered}>answered</li>
-                    <li onClick={filterBy}>unanswered</li>
+                    <li onClick={handleChangeFilter} id="unAnswer">answered</li>
+                    <li onClick={handleChangeFilter} id="answer">unanswered</li>
                 </ul>
             </div>
+
+            <Questions filterBy={filterBy} />
+
         </div>
     )
 }
 
 LeaderBoard.propTypes = {
-    user: propTypes.object.isRequired,
-    questions: propTypes.object.isRequired
+    dispatch: PropTypes.func.isRequired
 
 }
+
 
 export default connect()(LeaderBoard)

@@ -5,7 +5,7 @@ import { ADD_ANSWER, REMOVE_ANSWER } from '../Actions/Share'
 export function questions(state = {}, action) {
     switch (action.type) {
         case LOAD_QUESTIONS:
-            return action.question
+            return action.questions
 
         case ADD_QUESTION:
             return {
