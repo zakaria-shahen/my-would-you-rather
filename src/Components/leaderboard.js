@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
-import { Questions } from './Questions'
+import  Questions  from './Questions'
 
 const LeaderBoard = props => {
 
@@ -17,7 +17,7 @@ const LeaderBoard = props => {
     }
 
     return (
-        <div class={"leaderBoard"}>
+        <div className={"leaderBoard"}>
             <div>
                 <ul>
                     <li onClick={handleChangeFilter} id="unAnswer">answered</li>

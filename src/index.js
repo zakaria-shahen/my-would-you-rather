@@ -4,17 +4,20 @@ import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 
 import Reducers from './Reducers'
-import  middleware  from './Middleware'
+import middleware from './Middleware'
 
 import './index.css'
-import App from './Contraners/App'
+
+import { CssBaseline } from '@mui/material'
+import AppRouter from './Routes/index'
 
 const store = createStore(Reducers, middleware)
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <CssBaseline />
+      <AppRouter />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

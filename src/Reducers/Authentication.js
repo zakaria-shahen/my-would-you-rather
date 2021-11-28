@@ -1,11 +1,11 @@
 import { LOGIN, LOGOUT } from '../Actions/Authentication'
 
-export function authentication(state = {}, action) {
+export function authentication(state = "", action) {
     switch (action.type) {
         case LOGIN:
             return action.loginInfo.id
         case LOGOUT:
-            return {}
+            return ""
         default:
             return state
     }

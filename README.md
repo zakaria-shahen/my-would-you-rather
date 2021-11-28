@@ -10,8 +10,7 @@ App to learn Redux and more..
 
 
 ## Routers
-- `/login`
--  `/`
+- `/login` OR  `/`
    - `/add`
    - `/leaderboard`
    - `/questions:id`

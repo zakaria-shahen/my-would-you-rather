@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
 import { addQuestion } from '../Actions/Question'
-import { connect } from 'http2'
 
 const Add = props => {
     const [newQuestion, setNewQuestion] = useState({

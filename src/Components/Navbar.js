@@ -1,7 +1,11 @@
 import { connect } from 'react-redux'
-import { PropsTypes } from 'prop-types'
-import { Link } from 'react-router-dom'
+import { PropTypes } from 'prop-types'
+import { NavLink } from 'react-router-dom'
 import { logout } from '../Actions/Authentication'
+
+// import logo from '../vote.png'
+import '../Navbar.css'
+
 
 export const Navbar = props => {
     const { authentication, dispatch } = props
@@ -9,26 +13,46 @@ export const Navbar = props => {
         dispatch(logout())
     }
     return (
-        <nav>
-            <ul>
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/LeaderBoard">LeaderBoard</Link></li>
-                {
-                    !authentication && (<li><Link to="/Login">Login</Link></li>)
-                }
+        <header>
 
-                {
-                    authentication && (<li onClick={handleLogout}>Logout</li>)
-                }
+            <nav>
+                <ul>
 
-            </ul>
-        </nav>
+                    {
+                        !authentication && (<li><NavLink to="/">Login</NavLink></li>)
+                    }
+
+                    {
+                        authentication && (
+                            <>
+                                <li><NavLink to="/LeaderBoard">LeaderBoard</NavLink></li>
+                                <li><NavLink to="/Add">Add</NavLink></li>
+                                <li><a href="" onClick={handleLogout}>Logout</a></li>
+                            </>
+                        )
+                    }
+
+                </ul>
+            </nav>
+
+
+            {authentication &&(<div className="username">
+                <h4>{props.authentication}</h4>
+            </div>)}
+        </header>
     )
 }
 
 Navbar.propTypes = {
-    dispatch: PropsTypes.func.isRequired,
-    authentication: PropsTypes.string
+    dispatch: PropTypes.func.isRequired,
+    authentication: PropTypes.string
 }
 
-export default connect()(Navbar)
+const mapStateToProps = state => {
+    const { authentication } = state
+    return {
+        authentication
+    }
+}
+
+export default connect(mapStateToProps)(Navbar)

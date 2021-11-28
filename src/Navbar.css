@@ -1,0 +1,51 @@
+
+
+
+/*  Navbar Component */
+header, li, ul, nav, a {
+
+  /* border: 1px solid  red; */
+}
+
+
+header {
+  background-color:  #262626;
+  color: #efefee;
+  display: flex;
+  align-items: end;
+
+}
+
+    .username {
+      flex-grow: 0.09;
+    }
+
+    header nav {
+      flex-grow: 2;
+    }
+
+      header nav ul {
+        align-items: end;
+
+          display: flex;
+        }
+
+
+        nav ul li {
+          list-style: none;
+          padding: 10px 30px;
+        }
+
+        nav ul li:hover {
+          background-color: #264653;
+        }
+            header a{
+              color: #efefee;
+              text-decoration: none;
+              
+            }
+
+            nav ul .active {
+              color: #F4A261;
+              font-weight: 700;
+            }

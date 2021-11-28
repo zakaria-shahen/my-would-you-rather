@@ -1,37 +1,56 @@
-import { PropTypes } from 'react-redux'
+import { PropTypes } from 'prop-types'
+import { useState } from 'react'
 import { connect } from 'react-redux'
-import { Login } from '../Actions/Authentication'
+import { useNavigate } from 'react-router-dom'
+import { login } from '../Actions/Authentication'
 
+import Box from '@mui/material/Box'
+import InputLabel from '@mui/material/InputLabel'
+import MenuItem from '@mui/material/MenuItem'
+import FormControl from '@mui/material/FormControl'
+import Select from '@mui/material/Select'
+import Button from '@mui/material/Button'
 
-const LoginComponent = props => {
+const Login = props => {
+
+    const [username, setUsername] = useState("default")
+    const navigate = useNavigate()
+    const handleUsername = event => setUsername(event.target.value)
 
     const handleLogin = event => {
         event.preventDefault()
-        const username = event.target.selected
-        props.dispatch(Login(props.users[username]))
-        
-        // TODO: redirect to Home LeaderBoard
-        
+        props.dispatch(login(props.users[username]))
+
+        navigate("/")
     }
 
 
     return (
-        <div class={"Login"}>
-            <form>
-                <select id='username'>
-                {/* TODO: create state 'username' */}
-                    {props.usersIDs.map(id => (
-                        <option key={id} value={id}>{props.users[id].name}</option>
-                    ))}
-                </select>
+        <div style={{ "padding": "50px 150px" }}>
+            <Box sx={{ minWidth: 120 }}>
+                <FormControl fullWidth>
+                    <InputLabel color="warning">Username</InputLabel>
+                    <Select value={username} onChange={handleUsername} color="warning">
+                        <MenuItem value="default" disabled>Select Username</MenuItem>
+                        {props.usersIDs.map(id => (
+                            <MenuItem key={id} value={id}>{props.users[id].name}</MenuItem>
+                        ))}
+                    </Select>
 
-                <button onClick={handleLogin}>Login</button>
-            </form>
+                    <br />
+
+                    <Button onClick={handleLogin} variant="contained" color="warning" disableElevation>
+                        Login
+                    </Button>
+                </FormControl>
+            </Box>
         </div>
+
+
     )
 }
 
-LoginComponent.propTypes = {
+Login.propTypes = {
     users: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired
 }
@@ -46,4 +65,8 @@ const mapStateToProps = state => {
 }
 
 
-export default connect(mapStateToProps)(LoginComponent)
+export default connect(mapStateToProps)(Login)
+
+
+
+
