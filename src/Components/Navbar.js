@@ -27,7 +27,7 @@ export const Navbar = props => {
                             <>
                                 <li><NavLink to="/LeaderBoard">LeaderBoard</NavLink></li>
                                 <li><NavLink to="/Add">Add</NavLink></li>
-                                <li><a href="" onClick={handleLogout}>Logout</a></li>
+                                <li><a href="/" onClick={handleLogout}>Logout</a></li>
                             </>
                         )
                     }

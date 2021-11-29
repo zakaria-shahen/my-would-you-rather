@@ -1,14 +1,18 @@
 import { useState } from 'react'
 import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
-import  Questions  from './Questions'
+import Questions from './Questions'
+
+import ToggleButton from '@mui/material/ToggleButton'
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
+
 
 const LeaderBoard = props => {
 
-    const [filterBy, setFilterBy] = useState("unAnswer")
+    const [filterBy, setFilterBy] = useState("unanswered")
 
     const handleChangeFilter = event => {
-        const value = event.target.id
+        const value = event.target.innerText.toLowerCase()
         if (filterBy === value) {
             return
         }
@@ -18,13 +22,17 @@ const LeaderBoard = props => {
 
     return (
         <div className={"leaderBoard"}>
-            <div>
-                <ul>
-                    <li onClick={handleChangeFilter} id="unAnswer">answered</li>
-                    <li onClick={handleChangeFilter} id="answer">unanswered</li>
-                </ul>
-            </div>
-
+            <>
+                <ToggleButtonGroup
+                    value={filterBy}
+                    onChange={handleChangeFilter}
+                    color="warning"
+                    exclusive
+                    style={{ display: "flex" }}>
+                    <ToggleButton style={{ flexGrow: "1" }} value="unanswered">unAnswered</ToggleButton>
+                    <ToggleButton style={{ flexGrow: "1" }} value="answered">answered</ToggleButton>
+                </ToggleButtonGroup>
+            </>
             <Questions filterBy={filterBy} />
 
         </div>

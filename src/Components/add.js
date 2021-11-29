@@ -4,6 +4,12 @@ import { connect } from 'react-redux'
 
 import { addQuestion } from '../Actions/Question'
 
+import TextField from '@mui/material/TextField'
+import FormControl from '@mui/material/FormControl'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import FormLabel from '@mui/material/FormLabel'
+
 const Add = props => {
     const [newQuestion, setNewQuestion] = useState({
         optionOne: '',
@@ -26,21 +32,33 @@ const Add = props => {
         // { optionOneText, optionTwoText, author }
         props.dispatch(addQuestion({
             optionOneText: newQuestion.optionOne,
-            optionTwoText: newQuestion.optionOne,
+            optionTwoText: newQuestion.optionTwo,
             author: props.author
         }))
     }
 
     return (
-        <div>
-            <form>
-                <label>would you rather</label>
-                <input onChange={handleChangeOption} id={"optionOne"} value={newQuestion.optionOne} />
-                <input onChange={handleChangeOption} id={"optionOne"} value={newQuestion.optionTwo} />
 
-                <button onClick={handleAddQuestion}>Save Question</button>
-            </form>
+        <div style={{ "padding": "50px 150px" }}>
+            <Box sx={{ minWidth: 120 }}>
+                <FormControl fullWidth>
+                    <FormLabel sx={{ fontSize: "25px", textTransform: "capitalize", margin: "8px auto" }}>
+                        would you rather....
+                    </FormLabel>
+                    <TextField label="Option One" value={newQuestion.optionTwo} />
+                    <br />
+                    <TextField label="Option Two" value={newQuestion.optionTwo} />
+
+                    <br />
+
+                    <Button onClick={handleAddQuestion} variant="contained" color="warning" disableElevation>
+                        Save Question
+                    </Button>
+                </FormControl>
+            </Box>
         </div>
+
+
     )
 }
 

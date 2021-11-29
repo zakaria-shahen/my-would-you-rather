@@ -2,18 +2,11 @@
 
 
 /*  Navbar Component */
-header, li, ul, nav, a {
-
-  /* border: 1px solid  red; */
-}
-
 
 header {
   background-color:  #262626;
   color: #efefee;
   display: flex;
-  align-items: end;
-
 }
 
     .username {
@@ -25,8 +18,6 @@ header {
     }
 
       header nav ul {
-        align-items: end;
-
           display: flex;
         }
 

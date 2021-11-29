@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
 
 import Question from './Question'
-
+import './Questions.css'
 
 const Questions = props => {
 
