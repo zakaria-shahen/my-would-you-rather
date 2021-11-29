@@ -32,13 +32,13 @@ const mapStateToProps = (state, onwProps) => {
 
     // order by date 
     const qKeys = Object.keys(questions)
-    let questionsOrder = qKeys.sort((a, b) => questions[a].timestamp - questions[b].timestamp)
+    let order = qKeys.sort((a, b) => questions[a].timestamp - questions[b].timestamp)
 
     //  1-> unAnswer | 2-> Answer
     return {
         questions: filterBy === "1"
-            ? questionsOrder.filter(qid => !answered.includes(qid))
-            : questionsOrder.filter(qid => answered.includes(qid))
+            ? order.filter(qid => !answered.includes(qid))
+            : order.filter(qid => answered.includes(qid))
     }
 }
 
