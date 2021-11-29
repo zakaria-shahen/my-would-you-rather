@@ -17,19 +17,14 @@ const Add = props => {
     })
 
 
-    const handleChangeOption = event => {
-        const key = event.target.id
-        const value = event.target.value
-        setNewQuestion({ [key]: value })
-    }
+    const handleChange = event => setNewQuestion(q =>({...q, [event.target.id]: event.target.value }))
 
     const handleAddQuestion = event => {
         event.preventDefault()
         if (newQuestion.optionOne === undefined || newQuestion.optionTwo === undefined) {
-            return
+            return alert("Error: insert Data ")
         }
 
-        // { optionOneText, optionTwoText, author }
         props.dispatch(addQuestion({
             optionOneText: newQuestion.optionOne,
             optionTwoText: newQuestion.optionTwo,
@@ -38,27 +33,24 @@ const Add = props => {
     }
 
     return (
+        <Box sx={{ minWidth: 120, margin: "50px 150px" }} component="form">
+            <FormControl fullWidth>
+                <FormLabel sx={{ fontSize: "25px", textTransform: "capitalize", margin: "8px auto" }}>
+                    would you rather....
+                </FormLabel>
+                <TextField id="optionOne" onChange={handleChange} value={newQuestion.optionOne}
+                    label="Option One" color="warning" />
+                <br />
+                <TextField id="optionTwo" onChange={handleChange} value={newQuestion.optionTwo}
+                    label="Option Two" color="warning" />
 
-        <div style={{ "padding": "50px 150px" }}>
-            <Box sx={{ minWidth: 120 }}>
-                <FormControl fullWidth>
-                    <FormLabel sx={{ fontSize: "25px", textTransform: "capitalize", margin: "8px auto" }}>
-                        would you rather....
-                    </FormLabel>
-                    <TextField label="Option One" value={newQuestion.optionTwo} />
-                    <br />
-                    <TextField label="Option Two" value={newQuestion.optionTwo} />
+                <br />
 
-                    <br />
-
-                    <Button onClick={handleAddQuestion} variant="contained" color="warning" disableElevation>
-                        Save Question
-                    </Button>
-                </FormControl>
-            </Box>
-        </div>
-
-
+                <Button onClick={handleAddQuestion} variant="contained" color="warning" disableElevation>
+                    Save Question
+                </Button>
+            </FormControl>
+        </Box>
     )
 }
 
@@ -69,7 +61,7 @@ Add.propTypes = {
 
 const mapStateToProps = state => {
     return {
-        author: state.Authentication
+        author: state.authentication
     }
 }
 

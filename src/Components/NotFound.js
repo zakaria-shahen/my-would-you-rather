@@ -12,7 +12,7 @@ const NotFound = props => {
 
             </div>
             <p>
-                if not Login. <Link to="/Login">Click Here</Link>
+                if not Login. <Link to="/">Click Here</Link>
             </p>
         </div>
     )

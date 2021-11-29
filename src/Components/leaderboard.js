@@ -9,30 +9,28 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
 
 const LeaderBoard = props => {
 
-    const [filterBy, setFilterBy] = useState("unanswered")
+    const [filterBy, setFilterBy] = useState("1")
 
     const handleChangeFilter = event => {
-        const value = event.target.innerText.toLowerCase()
+        const value = event.target.value
         if (filterBy === value) {
             return
         }
-
+        
         setFilterBy(value)
     }
 
     return (
-        <div className={"leaderBoard"}>
-            <>
-                <ToggleButtonGroup
-                    value={filterBy}
-                    onChange={handleChangeFilter}
-                    color="warning"
-                    exclusive
-                    style={{ display: "flex" }}>
-                    <ToggleButton style={{ flexGrow: "1" }} value="unanswered">unAnswered</ToggleButton>
-                    <ToggleButton style={{ flexGrow: "1" }} value="answered">answered</ToggleButton>
-                </ToggleButtonGroup>
-            </>
+        <div className="leaderBoard">
+            <ToggleButtonGroup
+                value={filterBy}
+                onChange={handleChangeFilter}
+                color="warning"
+                exclusive
+                sx={{ display: "flex" }}>
+                <ToggleButton sx={{ flexGrow: "1" }} value="1">unAnswered</ToggleButton>
+                <ToggleButton sx={{ flexGrow: "1" }} value="2">answered</ToggleButton>
+            </ToggleButtonGroup>
             <Questions filterBy={filterBy} />
 
         </div>
@@ -41,7 +39,6 @@ const LeaderBoard = props => {
 
 LeaderBoard.propTypes = {
     dispatch: PropTypes.func.isRequired
-
 }
 
 

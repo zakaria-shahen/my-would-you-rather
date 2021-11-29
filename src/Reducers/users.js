@@ -13,8 +13,8 @@ export function users(state = {}, action) {
                 ...state,
                 [authedUser]: {
                     ...state[authedUser],
-                    answer: {
-                        ...state[authedUser].answer,
+                    answers: {
+                        ...state[authedUser].answers,
                         [qid]: answer
                     }
                 }

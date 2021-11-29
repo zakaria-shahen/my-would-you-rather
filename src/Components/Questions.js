@@ -2,12 +2,18 @@ import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
 
 import Question from './Question'
-import './Questions.css'
 
 const Questions = props => {
 
+    const cssStyle = {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        paddingTop: "30px"
+    }
+
     return (
-        <div className="questions">
+        <div style={cssStyle}>
             {props.questions.map(qid => <Question id={qid} key={qid} />)}
         </div>
     )
@@ -21,20 +27,18 @@ Questions.propTypes = {
 
 const mapStateToProps = (state, onwProps) => {
     const { questions, users, authentication } = state
-    const { filterBy } = onwProps || "answer"
+    const { filterBy } = onwProps
     const answered = Object.keys(users[authentication].answers)
 
-    // Filter by date 
+    // order by date 
     const qKeys = Object.keys(questions)
     let questionsOrder = qKeys.sort((a, b) => questions[a].timestamp - questions[b].timestamp)
 
-    // if Filter not Answer (unAnswer)
-    if (filterBy !== "answer") {
-        questionsOrder.filter(qid => !answered.includes(qid))
-    }
-
+    //  1-> unAnswer | 2-> Answer
     return {
-        questions: questionsOrder
+        questions: filterBy === "1"
+            ? questionsOrder.filter(qid => !answered.includes(qid))
+            : questionsOrder.filter(qid => answered.includes(qid))
     }
 }
 
