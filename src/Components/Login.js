@@ -19,6 +19,11 @@ const Login = props => {
 
     const handleLogin = event => {
         event.preventDefault()
+        if (username === "default"){
+            alert("Error: Yor not Select Username")
+            return
+        }
+
         props.dispatch(login(props.users[username]))
 
         navigate("/")
