@@ -29,11 +29,17 @@ export function load() {
 
 
 
-export const addAnswer = answer => reducer => _saveQuestionAnswer(answer).then(() => {
+export const addAnswer = answer => reducer => {
     reducer(addAnswerFormat(answer))
-})
+    
+    _saveQuestionAnswer(answer).catch((error) => {
+        alert("Add Answer Error: try agin... ", error)
+        removeAnswer(answer)
+    })
 
-export const removeAnswer = answer => reducer => _saveQuestionAnswer(answer).then(() => {
-    // TODO: create API function remove answer ON _DATA.js
-    reducer(removeAnswerFormat(answer))
-})
+
+}
+
+
+const removeAnswer = answer => reducer => reducer(removeAnswerFormat(answer))
+

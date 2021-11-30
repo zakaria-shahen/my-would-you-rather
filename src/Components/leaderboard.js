@@ -3,8 +3,7 @@ import { connect } from 'react-redux'
 import { PropTypes } from 'prop-types'
 import Questions from './Questions'
 
-import ToggleButton from '@mui/material/ToggleButton'
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup'
+import { ToggleButton, ToggleButtonGroup } from '@mui/material'
 
 
 const LeaderBoard = props => {
@@ -16,7 +15,7 @@ const LeaderBoard = props => {
         if (filterBy === value) {
             return
         }
-        
+
         setFilterBy(value)
     }
 

@@ -45,7 +45,7 @@ export function questions(state = {}, action) {
                     ...state[qid],
                     [answer]: {
                         ...state[qid][answer],
-                        votes: state[qid][answer].votes.concat([authedUser])
+                        votes: state[qid][answer].votes.filer(id => id !== authedUser)
                     }
 
                 }

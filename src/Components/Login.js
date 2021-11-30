@@ -4,12 +4,11 @@ import { connect } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { login } from '../Actions/Authentication'
 
-import Box from '@mui/material/Box'
-import InputLabel from '@mui/material/InputLabel'
-import MenuItem from '@mui/material/MenuItem'
-import FormControl from '@mui/material/FormControl'
-import Select from '@mui/material/Select'
-import Button from '@mui/material/Button'
+
+import {
+    Box, InputLabel, MenuItem,
+    FormControl, Select, Button
+} from '@mui/material'
 
 const Login = props => {
 
@@ -19,7 +18,7 @@ const Login = props => {
 
     const handleLogin = event => {
         event.preventDefault()
-        if (username === "default"){
+        if (username === "default") {
             alert("Error: Yor not Select Username")
             return
         }
@@ -50,8 +49,6 @@ const Login = props => {
                 </FormControl>
             </Box>
         </div>
-
-
     )
 }
 

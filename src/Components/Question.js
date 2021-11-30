@@ -1,16 +1,15 @@
 import { useState } from 'react'
 import { connect } from 'react-redux'
-import { PropTypes } from 'prop-types'
+import { PropTypes, } from 'prop-types'
 import { addAnswer } from '../Actions/Share'
+import { Link } from 'react-router-dom'
 
 
-import Radio from '@mui/material/Radio'
-import RadioGroup from '@mui/material/RadioGroup'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import FormControl from '@mui/material/FormControl'
-import FormLabel from '@mui/material/FormLabel'
-import Button from '@mui/material/Button'
-import Box from '@mui/material/Box'
+import {
+    Radio, RadioGroup, FormControlLabel,
+    FormControl, FormLabel, Button, Box,
+    Avatar
+} from '@mui/material'
 
 
 
@@ -24,9 +23,7 @@ const cssStyle = {
 
 const Question = props => {
     const [answer, setAnswer] = useState(props.ifAnswer ? props.ifAnswer : "")
-
-    const handleRadio = event => setAnswer(event.target.value)
-
+    const handleRadio = ({ target }) => setAnswer(target.value)
 
     const handleSubmit = event => {
         event.preventDefault()
@@ -47,6 +44,15 @@ const Question = props => {
         <Box component="form" sx={cssStyle} onSubmit={handleSubmit}>
             <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
 
+                {props.username && (
+                    <>
+                        <Avatar alt={props.username} src={props.avatarURL} />
+                    </>
+
+                )}
+
+
+
                 <FormLabel component="legend">Would You Rather..</FormLabel>
                 <RadioGroup aria-label="Would You Rather.." onChange={handleRadio}  >
                     <FormControlLabel checked={answer === "optionOne"} value="optionOne" control={<Radio />} label={props.question.optionOne.text} />
@@ -64,12 +70,15 @@ const Question = props => {
                     <Button fullWidth sx={{ flexGrow: 1, mt: 1, mr: 1 }} type="submit" variant="outlined">
                         {props.ifAnswer ? "Edit Vote" : "Vote"}
                     </Button>
-                    {console.log(answer)}
+                    {/* TODO: Change Component  */}
                     {
+
                         props.ifAnswer && (
-                            <Button fullWidth sx={{ flexGrow: 1, mt: 1, mr: 1 }} href={`/question/${props.question.id}`} variant="outlined">
-                                details
-                            </Button>
+
+                            <Link to={`/question/${props.question.id}`}>
+                                <Button fullWidth sx={{ flexGrow: 1, mt: 1, mr: 1 }} variant="outlined">details</Button>
+                            </Link>
+
                         )
                     }
                 </div>
@@ -93,7 +102,8 @@ Question.propTypes = {
 
 const mapPropsToState = (state, ownerProps) => {
     const { questions, authentication } = state
-    const { id } = ownerProps
+    let { id } = ownerProps
+
     const question = questions[id]
     let ifAnswer = question.optionOne.votes.includes(authentication) && "optionOne"
     ifAnswer = ifAnswer ? ifAnswer : question.optionTwo.votes.includes(authentication) && "optionTwo"

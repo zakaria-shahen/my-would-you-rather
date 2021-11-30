@@ -17,6 +17,7 @@ export const addQuestion = (question) => reducer => _saveQuestion(question)
     }))
 
 export const removeQuestion = questionId => ({
+    // TODO: API  remove Question 
     type: REMOVE_QUESTION,
     questionId
 })

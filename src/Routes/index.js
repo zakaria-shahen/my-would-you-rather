@@ -6,8 +6,9 @@ import App from '../Contraners/App'
 import Login from '../Components/Login'
 import Add from '../Components/Add'
 import LeaderBoard from '../Components/LeaderBoard'
-import Question from '../Components/Question'
+import QuestionDetails from '../Components/QuestionDetails'
 import NotFound from '../Components/NotFound'
+import NewUser from '../Components/NewUser'
 
 
 
@@ -20,7 +21,7 @@ const AppRouter = props => {
                     <Route path="/" element={
                         <>
                             {
-                                !props.authentication && <Login />
+                                !props.authentication && (<Login />)
                             }
 
                             {
@@ -34,13 +35,17 @@ const AppRouter = props => {
                     {
                         props.authentication && (<>
 
-                    <Route path="/Add" element={<Add />} />
-                    <Route path="/LeaderBoard" element={<LeaderBoard />} />
-                    <Route path="/Question:id" element={<Question />} />
+                            <Route path="/Add" element={<Add />} />
+                            <Route path="/LeaderBoard" element={<LeaderBoard />} />
+                            <Route path="/question/:id" element={<QuestionDetails />} />
 
                         </>)
                     }
-                    
+
+                    {
+                        !props.authentication && <Route path="/NewUser" element={<NewUser />} />
+                    }
+
                     <Route path="*" element={<NotFound />} />
                 </Route>
             </Routes>

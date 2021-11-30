@@ -1,23 +1,26 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+
 
 import { addQuestion } from '../Actions/Question'
+import {
+    TextField, FormControl,
+    Box, Button, FormLabel
+} from '@mui/material'
 
-import TextField from '@mui/material/TextField'
-import FormControl from '@mui/material/FormControl'
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-import FormLabel from '@mui/material/FormLabel'
 
 const Add = props => {
     const [newQuestion, setNewQuestion] = useState({
         optionOne: '',
         optionTwo: ''
     })
+    const navigate = useNavigate()
+
+    const handleChange = event => setNewQuestion(q => ({ ...q, [event.target.id]: event.target.value }))
 
 
-    const handleChange = event => setNewQuestion(q =>({...q, [event.target.id]: event.target.value }))
 
     const handleAddQuestion = event => {
         event.preventDefault()
@@ -30,6 +33,8 @@ const Add = props => {
             optionTwoText: newQuestion.optionTwo,
             author: props.author
         }))
+
+        navigate("/LeaderBoard")
     }
 
     return (

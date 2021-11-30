@@ -200,3 +200,21 @@ export function _saveQuestionAnswer({ authedUser, qid, answer }) {
     }, 500)
   })
 }
+
+export function newUser({ id, name, avatarURL }) {
+  const newUser = {
+    id,
+    name,
+    avatarURL,
+    answers: {},
+    questions: []
+  }
+
+  return new Promise((res, rej) => {
+    setTimeout(() => {
+      users = { ...users, [newUser.id]: newUser }
+      res()
+    }, 500)
+  })
+
+}

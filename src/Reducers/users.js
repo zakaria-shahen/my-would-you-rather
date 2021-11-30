@@ -1,5 +1,5 @@
 import { ADD_ANSWER, REMOVE_ANSWER } from '../Actions/Share'
-import {LOAD_USERS} from '../Actions/Users'
+import {LOAD_USERS, NEW_USER} from '../Actions/Users'
 import { ADD_QUESTION, REMOVE_QUESTION } from '../Actions/Question'
 
 export function users(state = {}, action) {
@@ -58,6 +58,12 @@ export function users(state = {}, action) {
                 }
             }
         }
+
+        case NEW_USER: 
+            return {
+                ...state,
+                [action.user.id]: action.user
+            }
 
         default:
             return state
