@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { connect } from 'react-redux'
 import { newUser } from '../Actions/Users'
-import { login } from '../Actions/Authentication'
+// import { login } from '../Actions/Authentication'
 
 import {
     Box, FormControl, FormLabel,

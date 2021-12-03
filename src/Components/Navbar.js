@@ -33,6 +33,7 @@ export const Navbar = props => {
                         authentication && (
                             <>
                                 <li><NavLink to="/LeaderBoard">LeaderBoard</NavLink></li>
+                                <li><NavLink to="/">home</NavLink></li>
                                 <li><NavLink to="/Add">Add</NavLink></li>
                                 <li><a href="#Logout" onClick={handleLogout}>Logout</a></li>
                             </>)

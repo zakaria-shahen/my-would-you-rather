@@ -20,7 +20,7 @@ const LeaderBoard = props => {
     }
 
     return (
-        <div className="leaderBoard">
+        <div className="Home">
             <ToggleButtonGroup
                 value={filterBy}
                 onChange={handleChangeFilter}

@@ -6,16 +6,18 @@ const LinearProgressWithLabel = props => {
         <Box sx={{ display: 'flex', alignItems: '' }}>
             <Box sx={{ width: '100%', mr: 1}}>
                 <LinearProgress  sx={{marginBottom: "8px"}} variant="determinate" value={props.value} />
-                <span>{`${parseInt(props.value)}% - ${props.number} Votes`} </span>
-
+                <span>{`${props.value && parseInt(props.value)}% - ${props.number} Votes`} </span>
+                
             </Box>
+
+
         </Box>
     )
 }
 
 LinearProgressWithLabel.propTypes = {
     number: PropTypes.number,
-    value: PropTypes.number.isRequired
+    value: PropTypes.number
 }
 
 

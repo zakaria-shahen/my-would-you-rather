@@ -7,7 +7,6 @@ import { load } from '../Actions/Share'
 import Navbar from '../Components/Navbar'
 import LinearProgress from '@mui/material/LinearProgress'
 
-
 const App = props => {
 
   const { dispatch } = props
