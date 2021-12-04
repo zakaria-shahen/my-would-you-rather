@@ -14,14 +14,5 @@ const newUserFormat = user => ({
     user
 })
 
-export const newUser = user => reducer => {
-
-    newUserAPI(user)
-        .then(() => reducer(newUserFormat(user))).then(() => login(user))
-
-    // newUserAPI(user).catch((e) => {
-    //     logout()
-    //     removeUser()
-    // })
-
-}
+export const newUser = user => reducer => newUserAPI(user).then((user) => reducer(newUserFormat(user)))
+    .catch(() => console.log("Error: try again.. add user"))

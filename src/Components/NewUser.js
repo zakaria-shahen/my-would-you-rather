@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { connect } from 'react-redux'
 import { newUser } from '../Actions/Users'
-// import { login } from '../Actions/Authentication'
-
+import { useNavigate } from  'react-router-dom'
 import {
     Box, FormControl, FormLabel,
     TextField, Button
 } from '@mui/material'
+
 
 const NewUser = props => {
     const [user, setUser] = useState({
@@ -14,6 +14,8 @@ const NewUser = props => {
         name: "",
         avatarURL: ""
     })
+
+    const navigate = useNavigate()
 
     const handelAddUser = event => {
         event.preventDefault()
@@ -23,8 +25,9 @@ const NewUser = props => {
             return
         }
 
-        newUser(user )
-
+        props.dispatch(newUser(user))
+        navigate("/")
+        
     }
 
     const handelInput = ({ target }) => setUser(user => ({ ...user, [target.id]: target.value }))

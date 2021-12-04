@@ -1,44 +1,41 @@
-import { useState } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { PropTypes } from 'prop-types'
-import Questions from './Questions'
+import { Box } from '@mui/material'
 
-import { ToggleButton, ToggleButtonGroup } from '@mui/material'
-
+import UserCard from './UserCard'
 
 const LeaderBoard = props => {
-
-    const [filterBy, setFilterBy] = useState("1")
-
-    const handleChangeFilter = event => {
-        const value = event.target.value
-        if (filterBy === value) {
-            return
-        }
-
-        setFilterBy(value)
+    const css = {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        paddingTop: "30px",
     }
 
     return (
-        <div className="Home">
-            <ToggleButtonGroup
-                value={filterBy}
-                onChange={handleChangeFilter}
-                color="warning"
-                exclusive
-                sx={{ display: "flex" }}>
-                <ToggleButton sx={{ flexGrow: "1" }} value="1">unAnswered</ToggleButton>
-                <ToggleButton sx={{ flexGrow: "1" }} value="2">answered</ToggleButton>
-            </ToggleButtonGroup>
-            <Questions filterBy={filterBy} />
-
-        </div>
+        <Box sx={css}>
+            {props.SortUsersId.map(id => <UserCard user={props.users[id]} key={id} />)}
+        </Box>
     )
 }
 
 LeaderBoard.propTypes = {
-    dispatch: PropTypes.func.isRequired
+    users: PropTypes.object,
+    SortUsersId: PropTypes.array
 }
 
 
-export default connect()(LeaderBoard)
+const mapStateToProps = ({ users }) => {
+    //  Sort 
+    const UsersIds = Object.keys(users)
+    const SortUsersId = UsersIds.sort((idOne, idTwo) => {
+        const scoresOne = users[idOne].questions.length + Object.keys(users[idOne].answers).length
+            , scoresTwo = users[idTwo].questions.length + Object.keys(users[idTwo].answers).length
+        return - (scoresOne - scoresTwo)
+    })
+
+    return { users, SortUsersId }
+}
+
+
+export default connect(mapStateToProps)(LeaderBoard)

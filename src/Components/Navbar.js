@@ -15,6 +15,7 @@ export const Navbar = props => {
         dispatch(logout())
         navigate("/")
     }
+
     return (
         <header>
 
@@ -32,8 +33,8 @@ export const Navbar = props => {
                     {
                         authentication && (
                             <>
+                                <li><NavLink to="/">Home</NavLink></li>
                                 <li><NavLink to="/LeaderBoard">LeaderBoard</NavLink></li>
-                                <li><NavLink to="/">home</NavLink></li>
                                 <li><NavLink to="/Add">Add</NavLink></li>
                                 <li><a href="#Logout" onClick={handleLogout}>Logout</a></li>
                             </>)
@@ -42,11 +43,11 @@ export const Navbar = props => {
                 </ul>
             </nav>
 
-
+            
             {authentication && (<div className="username">
                 <h4>{props.authentication}</h4>
             </div>)}
-        </header>
+        </header >
     )
 }
 

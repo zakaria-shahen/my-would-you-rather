@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { connect } from 'react-redux'
 import { PropTypes, } from 'prop-types'
 import { addAnswer } from '../Actions/Share'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 
 import {
@@ -24,6 +24,8 @@ const cssStyle = {
 const Question = props => {
     const [answer, setAnswer] = useState(props.ifAnswer ? props.ifAnswer : "")
     const handleRadio = ({ target }) => setAnswer(target.value)
+    
+    const navigate = useNavigate()
 
     const handleSubmit = event => {
         event.preventDefault()
@@ -39,6 +41,12 @@ const Question = props => {
             answer
         }))
     }
+
+    const HandleDetails = event => {
+        event.preventDefault()
+        navigate(`/question/${props.question.id}`)
+        
+    } 
 
     return (
         <Box component="form" sx={cssStyle} onSubmit={handleSubmit}>
@@ -75,9 +83,7 @@ const Question = props => {
 
                         props.ifAnswer && (
 
-                            <Link to={`/question/${props.question.id}`}>
-                                <Button fullWidth sx={{ flexGrow: 1, mt: 1, mr: 1 }} variant="outlined">details</Button>
-                            </Link>
+                            <Button onClick={HandleDetails} fullWidth sx={{ flexGrow: 1, mt: 1, mr: 1 }} variant="outlined">details</Button>
 
                         )
                     }

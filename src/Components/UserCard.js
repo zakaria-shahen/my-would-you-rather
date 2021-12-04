@@ -1,24 +1,54 @@
 import PropTypes from 'prop-types'
 import { Box, Avatar } from '@mui/material'
-// import LinearProgressWithLabel from './LinearProgressWithLabel'
 
 
 const UserCard = props => {
 
-    const { id, name, avatarURL, questions, answers } = props.user
+    const { name, avatarURL, questions, answers } = props.user
     const questionsNumber = questions.length
     const answeredNumber = Object.keys(answers).length
+    const css = {
+        ":hover": {
+            background: "#264653",
+            transitionDuration: "500ms",
+            transitionProperty: "background"
 
+        },
+        width: "500px",
+        background: "#dc852c",
+        color: "#fff",
+        borderRadius: "10px",
+        margin: "15px auto",
+        padding: "25px",
+        display: "flex",
+        alignItems: "center",
+        "ul": {
+            padding: 0,
+            "li": {
+                listStyle: "none",
+                display: "flex",
+                marginBottom: "8px",
+                "span:nth-of-type(1n)": {
+                    width: "170px"
+                },
+                "span:nth-of-type(2n)": {
+                    width: "20px"
+                }
+
+            }
+        },
+        
+    }
     return (
-        <Box>
-            <Box>
-                <Avatar alt={name} src={avatarURL} />
+        <Box sx={css}>
+            <Box sx={{flexGrow: "3"}}>
+                <Avatar sx={{width: "120px", height: "120px"}} alt={name} src={avatarURL} />
             </Box>
-            <Box>
+            <Box sx={{flexGrow: "4"}}>
                 <h3>{name}</h3>
                 <ul>
                     <li>
-                        <span>Your Questions</span>
+                        <span>Create Questions</span>
                         <span>{questionsNumber}</span>
                     </li>
                     <li>
@@ -27,11 +57,11 @@ const UserCard = props => {
                     </li>
                 </ul>
             </Box>
-            <Box>
-                <div>
+            <Box sx={{flexGrow: "3", textAlign: "center"}}>
+                <Box>
                     <div>Score</div>
-                    <div>{ questionsNumber + answeredNumber }</div>
-                </div>
+                    <div>{questionsNumber + answeredNumber}</div>
+                </Box>
             </Box>
         </Box>)
 }
@@ -39,7 +69,6 @@ const UserCard = props => {
 
 UserCard.propTypes = {
     user: PropTypes.shape({
-        id: PropTypes.string,
         name: PropTypes.string,
         avatarURL: PropTypes.string,
         questions: PropTypes.array,

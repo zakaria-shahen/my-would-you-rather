@@ -37,9 +37,7 @@ export const addAnswer = answer => reducer => {
         removeAnswer(answer)
     })
 
-
 }
-
 
 const removeAnswer = answer => reducer => reducer(removeAnswerFormat(answer))
 

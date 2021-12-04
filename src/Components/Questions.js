@@ -28,6 +28,7 @@ Questions.propTypes = {
 const mapStateToProps = (state, onwProps) => {
     const { questions, users, authentication } = state
     const { filterBy } = onwProps
+    console.log(users)
     const answered = Object.keys(users[authentication].answers)
 
     // order by date 

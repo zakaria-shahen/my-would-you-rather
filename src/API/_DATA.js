@@ -201,6 +201,17 @@ export function _saveQuestionAnswer({ authedUser, qid, answer }) {
   })
 }
 
+export function _removeQuestionAnswer({ authedUser, qid, answer }){
+  return new Promise((res, rej) => {
+    setTimeout(() => {
+      delete users[authedUser].answers[qid]
+      questions[qid][answer].votes = questions[qid][answer].votes.filter(id => id !==  authedUser)
+      res()
+    },500)
+  })
+}
+
+
 export function newUser({ id, name, avatarURL }) {
   const newUser = {
     id,
@@ -213,7 +224,7 @@ export function newUser({ id, name, avatarURL }) {
   return new Promise((res, rej) => {
     setTimeout(() => {
       users = { ...users, [newUser.id]: newUser }
-      res()
+      res(newUser)
     }, 500)
   })
 

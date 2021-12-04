@@ -1,43 +1,44 @@
-import PropTypes from 'prop-types'
+import { useState } from 'react'
 import { connect } from 'react-redux'
-import {
-    Box
-} from '@mui/material'
+import { PropTypes } from 'prop-types'
+import Questions from './Questions'
 
-import UserCard from './UserCard'
+import { ToggleButton, ToggleButtonGroup } from '@mui/material'
+
 
 const Home = props => {
-    const css = {
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        paddingTop: "30px",
+
+    const [filterBy, setFilterBy] = useState("1")
+
+    const handleChangeFilter = event => {
+        const value = event.target.value
+        if (filterBy === value) {
+            return
+        }
+
+        setFilterBy(value)
     }
 
     return (
-        <Box sx={css}>
-            { props.SortUsersId.map(id => <UserCard user={props.users[id]} />) }
-        </Box>
+        <div className="Home">
+            <ToggleButtonGroup
+                value={filterBy}
+                onChange={handleChangeFilter}
+                color="warning"
+                exclusive
+                sx={{ display: "flex" }}>
+                <ToggleButton sx={{ flexGrow: "1" }} value="1">unAnswered</ToggleButton>
+                <ToggleButton sx={{ flexGrow: "1" }} value="2">answered</ToggleButton>
+            </ToggleButtonGroup>
+            <Questions filterBy={filterBy} />
+
+        </div>
     )
 }
 
 Home.propTypes = {
-    users: PropTypes.object,
-    SortUsersId: PropTypes.array
+    dispatch: PropTypes.func.isRequired
 }
 
 
-const mapStateToProps = ({ users }) => {
-    //  Sort 
-    const UsersIds = Object.keys(users)
-    const SortUsersId = UsersIds.sort((idOne, idTwo) => {
-        const scoresOne = users[idOne].questions.length + Object.keys(users[idOne].answers).length
-            , scoresTwo = users[idTwo].questions.length + Object.keys(users[idTwo].answers).length
-        return scoresOne - scoresTwo
-    })
-
-    return { users, SortUsersId }
-}
-
-
-export default connect(mapStateToProps)(Home)
+export default connect()(Home)
