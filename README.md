@@ -1,11 +1,11 @@
 
 <!-- [Demo Video](https://www.youtube.com/watch?v=xfmSkLAL__Q) -->
 
-# Schema Project 
+# My Would You Rather (redux, react,..) 
 website to vote for questions
 This project is an application of what you learned in 
 - redux,
-- other: react-router, react, material ui, and more..✌️
+- other: react-router v6, react, material ui, and more..✌️
 
 A site to vote on questions contains the following features
 - login
