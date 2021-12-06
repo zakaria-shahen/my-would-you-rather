@@ -16,16 +16,6 @@ A site to vote on questions contains the following features
 - add user 
 - loading view
 
-
-
-
-App to learn Redux and more.. 
-- redux
-- react-redux
-- redux-thunk
-- react-router-dom
-
-
 ## Routers
 - `/`
    - `/add`
