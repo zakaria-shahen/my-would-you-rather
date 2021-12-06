@@ -1,7 +1,24 @@
 
-[Demo Video](https://www.youtube.com/watch?v=xfmSkLAL__Q)
+<!-- [Demo Video](https://www.youtube.com/watch?v=xfmSkLAL__Q) -->
 
 # Schema Project 
+website to vote for questions
+This project is an application of what you learned in 
+- redux,
+- other: react-router, react, material ui, and more..✌️
+
+A site to vote on questions contains the following features
+- login
+- add question
+- answer question
+- view score users 
+- view votes 
+- add user 
+- loading view
+
+
+
+
 App to learn Redux and more.. 
 - redux
 - react-redux
@@ -10,31 +27,39 @@ App to learn Redux and more..
 
 
 ## Routers
-- `/login` OR  `/`
+- `/`
    - `/add`
-   - `/leaderboard`
+   - `/LeaderBoard`
    - `/questions:id`
+   - `/newUser`
 - `/404`
 
 ## Components 
-- navbar
-- 404 Not Found 
-- Login 
-- Home (Router-> LeaderBoard or Login)
-  - add 
-  - LeaderBoard (Users are ordered +  Filter -> is state) 
-  - questions (more info)
 
-## Option 
-- Loading 
-- map login by username TO by password
+- AppRouter 
+- App 
+- Home
+- LeaderBoard
+- Login
+- NewUser
+- NotFound
+- Navbar
+- Add
+- Questions
+- Question
+- QuestionDetails
+- LinearProgressWithLabel
+- UserCard
+
+
 
 ## The Store and Reducers
+
 ```js
 const store = {
   users: {},
   questions: {},
-  login: 'id',
+  Authentication: '',
 }
 
 ```
@@ -43,8 +68,7 @@ const store = {
 - Users
 1. LOAD_USERS
 2. soon
-   1. ADD_USERS
-   2. REMOVE_USERS
+   1. ADD_USERS or NEW_USER
   
   
 - Question
@@ -56,10 +80,10 @@ const store = {
 1. LOGIN
 2. LOGOUT
 
-- Share 
+<!-- - Share 
 1. ADD_ANSWER
 2. REMOVE_ANSWER
 3. addAnswer()
 4. removeAnswer()
 5. load()
-  
+   -->
