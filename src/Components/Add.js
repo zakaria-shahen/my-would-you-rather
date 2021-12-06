@@ -34,7 +34,7 @@ const Add = props => {
             author: props.author
         }))
 
-        navigate("/LeaderBoard")
+        navigate("/")
     }
 
     return (
