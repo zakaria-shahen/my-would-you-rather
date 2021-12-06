@@ -1,4 +1,4 @@
-import { _getQuestions, _getUsers, _saveQuestionAnswer, _removeQuestionAnswer } from '../API/_DATA'
+import { _getQuestions, _getUsers, _saveQuestionAnswer } from '../API/_DATA'
 import { loadQuestions } from './Question'
 import { loadUsers } from './Users'
 

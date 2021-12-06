@@ -1,5 +1,5 @@
 import { newUser as newUserAPI } from '../API/_DATA'
-import { login } from './Authentication'
+// import { login } from './Authentication'
 
 export const LOAD_USERS = "load_users"
 export const NEW_USER = "new_user"
