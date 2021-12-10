@@ -1,23 +1,21 @@
 import { useEffect } from 'react'
 import { connect } from 'react-redux'
 
+import LinearProgress from '@mui/material/LinearProgress'
 
 import { load } from '../Actions/Share'
-import AppRouter  from '../Routes/index'
+import AppRouter from '../Routes/index'
 
-import LinearProgress from '@mui/material/LinearProgress'
 
 const App = props => {
 
-  const { dispatch } = props
-  useEffect(() => dispatch(load()), [dispatch])
-  const loading = Object.keys(props.questions).length
+  const { load } = props
+  useEffect(() => load(), [load])
 
   return (
     <>
-      {loading !== 0 ? (<>
-
-        <AppRouter authentication={props.authentication} />
+      {props.loading !== 0 ? (<>
+        <AppRouter />
       </>) : <LinearProgress color="warning" />
 
       }
@@ -26,14 +24,11 @@ const App = props => {
 }
 
 
-const mapStateToProps = state => {
-  const { questions, authentication } = state
-
-  return {
-    questions,
-    authentication
-  }
-}
+const mapStateToProps = ({ questions }) => ({
+  loading: Object.keys(questions).length
+})
 
 
-export default connect(mapStateToProps)(App)
+const mapDispatch = dispatch => ({ load: () => dispatch(load()) })
+
+export default connect(mapStateToProps, mapDispatch)(App)

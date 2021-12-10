@@ -24,29 +24,31 @@ const cssStyle = {
 const Question = props => {
     const [answer, setAnswer] = useState(props.ifAnswer ? props.ifAnswer : "")
     const handleRadio = ({ target }) => setAnswer(target.value)
-    
+
     const navigate = useNavigate()
 
     const handleSubmit = event => {
         event.preventDefault()
-        const { authedUser, question, dispatch } = props
+        const { authedUser, question, addAnswer } = props
 
         if (!answer) {
             alert("Not input")
             return
         }
-        dispatch(addAnswer({
+
+        // this is addAnswer inside props object
+        addAnswer({
             authedUser,
             qid: question.id,
             answer
-        }))
+        })
     }
 
     const HandleDetails = event => {
         event.preventDefault()
         navigate(`/question/${props.question.id}`)
-        
-    } 
+
+    }
 
     return (
         <Box component="form" sx={cssStyle} onSubmit={handleSubmit}>
@@ -58,8 +60,6 @@ const Question = props => {
                     </>
 
                 )}
-
-
 
                 <FormLabel component="legend">Would You Rather..</FormLabel>
                 <RadioGroup aria-label="Would You Rather.." onChange={handleRadio}  >
@@ -79,14 +79,9 @@ const Question = props => {
                         {props.ifAnswer ? "Edit Vote" : "Vote"}
                     </Button>
                     {/* TODO: Change Component  */}
-                    {
 
-                        props.ifAnswer && (
+                    <Button onClick={HandleDetails} fullWidth sx={{ flexGrow: 1, mt: 1, mr: 1 }} variant="outlined">details</Button>
 
-                            <Button onClick={HandleDetails} fullWidth sx={{ flexGrow: 1, mt: 1, mr: 1 }} variant="outlined">details</Button>
-
-                        )
-                    }
                 </div>
             </FormControl>
         </Box>
@@ -97,7 +92,7 @@ const Question = props => {
 Question.propTypes = {
     question: PropTypes.object.isRequired,
     authedUser: PropTypes.string.isRequired,
-    dispatch: PropTypes.func.isRequired,
+    addAnswer: PropTypes.func.isRequired,
     ifAnswer: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.bool
@@ -120,8 +115,10 @@ const mapPropsToState = (state, ownerProps) => {
     }
 }
 
+const mapDispatch = dispatch => ({ addAnswer: (a) => dispatch(addAnswer(a)) })
 
-export default connect(mapPropsToState)(Question)
+
+export default connect(mapPropsToState, mapDispatch)(Question)
 
 
 
