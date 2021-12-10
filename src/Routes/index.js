@@ -1,8 +1,5 @@
-import { connect } from 'react-redux'
-import { PropTypes } from 'prop-types'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-import App from '../Containers/App'
 import Login from '../Components/Login'
 import Add from '../Components/Add'
 import LeaderBoard from '../Components/LeaderBoard'
@@ -10,52 +7,32 @@ import Home from '../Components/Home'
 import QuestionDetails from '../Components/QuestionDetails'
 import NotFound from '../Components/NotFound'
 import NewUser from '../Components/NewUser'
+import Navbar from '../Components/Navbar'
+
+import ProtectedRouter from './ProtectedRoute'
 
 
 const AppRouter = props => {
 
     return (
         <BrowserRouter>
+            <Navbar />
+
             <Routes>
-                <Route path="/" element={<App />} >
+                {/* Private */}
+                <Route path="/" element={<ProtectedRouter children={<Home />} />} />
+                <Route path="/Add" element={<ProtectedRouter children={<Add />} />} />
+                <Route path="/LeaderBoard" element={<ProtectedRouter children={<LeaderBoard />} />} />
+                <Route path="/question/:id" element={<ProtectedRouter children={<QuestionDetails />} />} />
 
-                    {
-                        props.authentication && (<>
 
-                            <Route path="/" element={<Home />} />
-                            <Route path="/Add" element={<Add />} />
-                            <Route path="/LeaderBoard" element={<LeaderBoard />} />
-                            <Route path="/question/:id" element={<QuestionDetails />} />
-
-                        </>)
-                    }
-
-                    {
-                        !props.authentication && (<>
-
-                            <Route path="/NewUser" element={<NewUser />} />
-                            <Route path="/" element={<Login />} />
-
-                        </>)
-                    }
-
-                    <Route path="*" element={<NotFound />} />
-                </Route>
+                {/* Public  */}
+                <Route path="*" element={<NotFound />} />
+                <Route path="/Login" element={<Login />} />
+                <Route path="/NewUser" element={<NewUser />} />
             </Routes>
         </BrowserRouter>)
 
 }
 
-AppRouter.propTypes = {
-    authentication: PropTypes.string
-}
-
-const mapStateToProps = state => {
-    const { authentication } = state
-    return {
-        authentication
-    }
-}
-
-
-export default connect(mapStateToProps)(AppRouter)
+export default AppRouter

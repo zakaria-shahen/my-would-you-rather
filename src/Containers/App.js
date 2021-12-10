@@ -1,10 +1,10 @@
 import { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { Outlet } from 'react-router'
 
 
 import { load } from '../Actions/Share'
-import Navbar from '../Components/Navbar'
+import AppRouter  from '../Routes/index'
+
 import LinearProgress from '@mui/material/LinearProgress'
 
 const App = props => {
@@ -16,9 +16,8 @@ const App = props => {
   return (
     <>
       {loading !== 0 ? (<>
-        <Navbar />
 
-        <Outlet />
+        <AppRouter authentication={props.authentication} />
       </>) : <LinearProgress color="warning" />
 
       }
@@ -28,10 +27,11 @@ const App = props => {
 
 
 const mapStateToProps = state => {
-  const { questions } = state
+  const { questions, authentication } = state
 
   return {
-    questions
+    questions,
+    authentication
   }
 }
 

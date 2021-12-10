@@ -1,18 +1,19 @@
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import { PropTypes } from 'prop-types'
 import { NavLink, useNavigate } from 'react-router-dom'
-import { logout } from '../Actions/Authentication'
 
-// import logo from '../vote.png'
+import { logout } from '../Actions/Authentication'
 import '../Navbar.css'
 
 
 export const Navbar = props => {
-    const { authentication, dispatch } = props
+    const { authentication } = props
     const navigate = useNavigate()
 
     const handleLogout = event => {
-        dispatch(logout())
+        event.preventDefault()
+        props.logout()
         navigate("/")
     }
 
@@ -43,24 +44,24 @@ export const Navbar = props => {
                 </ul>
             </nav>
 
-            
+
             {authentication && (<div className="username">
                 <h4>{props.authentication}</h4>
             </div>)}
-        </header >
+        </header>
     )
 }
 
 Navbar.propTypes = {
-    dispatch: PropTypes.func.isRequired,
+    logout: PropTypes.func,
     authentication: PropTypes.string
 }
 
-const mapStateToProps = state => {
-    const { authentication } = state
-    return {
-        authentication
-    }
-}
+const mapStateToProps = state => ({
+    authentication: state.authentication
+})
 
-export default connect(mapStateToProps)(Navbar)
+
+const mapDispatchToProps = dispatch => ({logout: () => dispatch(logout())})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar)

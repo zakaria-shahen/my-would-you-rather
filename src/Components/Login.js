@@ -1,7 +1,7 @@
 import { PropTypes } from 'prop-types'
 import { useState } from 'react'
 import { connect } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { login } from '../Actions/Authentication'
 
 
@@ -16,6 +16,8 @@ const Login = props => {
     const navigate = useNavigate()
     const handleUsername = event => setUsername(event.target.value)
 
+    const targetPath = useLocation()
+
     const handleLogin = event => {
         event.preventDefault()
         if (username === "default") {
@@ -25,7 +27,7 @@ const Login = props => {
 
         props.dispatch(login(props.users[username]))
 
-        navigate("/")
+        navigate(targetPath.state?.path || "/")
     }
 
 

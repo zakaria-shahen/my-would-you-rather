@@ -9,7 +9,7 @@ import middleware from './Middleware'
 import './index.css'
 
 import { CssBaseline } from '@mui/material'
-import AppRouter from './Routes/index'
+import App from './Containers/App'
 
 const store = createStore(Reducers, middleware)
 
@@ -17,7 +17,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <CssBaseline />
-      <AppRouter />
+      <App />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

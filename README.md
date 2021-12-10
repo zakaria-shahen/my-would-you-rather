@@ -24,6 +24,14 @@ A site to vote on questions contains the following features
    - `/newUser`
 - `/404`
 
+
+## How to using
+
+```sh
+npm install
+npm start
+```
+
 ## Components 
 
 - AppRouter 
