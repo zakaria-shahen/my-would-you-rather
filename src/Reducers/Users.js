@@ -29,11 +29,12 @@ export function users(state = {}, action) {
                 [authedUser]: {
                     ...state[authedUser],
                     answer: {
-                        ...state[authedUser].answer
+                        ...state[authedUser].answers
                     }
                 }
             }
-            delete newState[authedUser].answer[qid]
+            // console.log(newState[authedUser], authedUser)
+            delete newState[authedUser].answers[qid]
             return newState
         }
 

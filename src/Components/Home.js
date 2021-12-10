@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import { connect } from 'react-redux'
-import { PropTypes } from 'prop-types'
 import Questions from './Questions'
 
 import { ToggleButton, ToggleButtonGroup } from '@mui/material'
@@ -31,14 +29,9 @@ const Home = props => {
                 <ToggleButton sx={{ flexGrow: "1" }} value="2">answered</ToggleButton>
             </ToggleButtonGroup>
             <Questions filterBy={filterBy} />
-
         </div>
     )
 }
 
-Home.propTypes = {
-    dispatch: PropTypes.func.isRequired
-}
 
-
-export default connect()(Home)
+export default Home

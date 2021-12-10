@@ -25,7 +25,7 @@ const Login = props => {
             return
         }
 
-        props.dispatch(login(props.users[username]))
+        props.login(props.users[username])
 
         navigate(targetPath.state?.path || "/")
     }
@@ -56,7 +56,7 @@ const Login = props => {
 
 Login.propTypes = {
     users: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired
+    login: PropTypes.func.isRequired
 }
 
 
@@ -68,8 +68,9 @@ const mapStateToProps = state => {
     }
 }
 
+const mapDispatch = dispatch => ({login: (a) => dispatch(login(a))})
 
-export default connect(mapStateToProps)(Login)
+export default connect(mapStateToProps, mapDispatch)(Login)
 
 
 

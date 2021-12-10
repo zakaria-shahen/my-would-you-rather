@@ -6,7 +6,7 @@ import { PropTypes, } from 'prop-types'
 
 import {
     Radio, RadioGroup, FormControlLabel,
-    FormControl, FormLabel, Button, Box,
+    FormControl, FormLabel, Box,
     Avatar
 } from '@mui/material'
 import LinearProgressWithLabel from './LinearProgressWithLabel'
@@ -30,7 +30,7 @@ const QuestionDetails = props => {
     const params = useParams()
     const qid = params.id
 
-    const { questions, users, dispatch, authentication } = props
+    const { questions, users, editAnswer, authentication } = props
     const question = questions[qid]
 
     if (!question) {
@@ -43,17 +43,18 @@ const QuestionDetails = props => {
 
 
 
-    const [answer, setAnswer] = useState(users[authentication].answers[qid])
-    const handleRadio = ({ target }) => setAnswer(target.value)
+    const [answer] = useState(users[authentication].answers[qid])
+    // const [answer, setAnswer] = useState(users[authentication].answers[qid])
+    // const handleRadio = ({ target }) => setAnswer(target.value)
 
     const handleSubmit = event => {
         event.preventDefault()
 
-        dispatch(addAnswer({
+        editAnswer({
             authedUser: authentication,
             qid,
             answer
-        }))
+        })
     }
 
 
@@ -62,24 +63,25 @@ const QuestionDetails = props => {
             <Box component="form" sx={cssStyle} onSubmit={handleSubmit}>
                 <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
 
-                    <div style={{display: "flex", alignItems: "center"}}>
+                    <div style={{ display: "flex", alignItems: "center" }}>
                         <Avatar alt={author.name} src={author.avatarURL} />
                         <span>{author.name}</span>
                     </div>
 
                     <FormLabel component="legend">Would You Rather..</FormLabel>
-                    <RadioGroup aria-label="Would You Rather.." onChange={handleRadio}  >
+                    {/* <RadioGroup aria-label="Would You Rather.." onChange={handleRadio}  > */}
+                    <RadioGroup aria-label="Would You Rather.."  >
                         <FormControlLabel checked={answer === "optionOne"} value="optionOne" control={<Radio />} label={optionOne.text} />
                         <LinearProgressWithLabel value={optionOne.votes.length / totalVotes} number={optionOne.votes.length} />
-                        
+
                         <FormControlLabel checked={answer === "optionTwo"} value="optionTwo" control={<Radio />} label={optionTwo.text} />
                         <LinearProgressWithLabel value={optionTwo.votes.length / totalVotes} number={optionTwo.votes.length} />
                     </RadioGroup>
 
                     <div style={{ display: "flex", width: "400px" }}>
-                        <Button fullWidth sx={{ flexGrow: 1, mt: 1, mr: 1 }} type="submit" variant="outlined">
+                        {/* <Button fullWidth sx={{ flexGrow: 1, mt: 1, mr: 1 }} type="submit" variant="outlined">
                             Edit Vote
-                        </Button>
+                        </Button> */}
                     </div>
                 </FormControl>
             </Box>
@@ -90,7 +92,7 @@ const QuestionDetails = props => {
 QuestionDetails.propTypes = {
     questions: PropTypes.object.isRequired,
     authentication: PropTypes.string.isRequired,
-    dispatch: PropTypes.func.isRequired
+    editAnswer: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ questions, authentication, users }) => ({
@@ -99,5 +101,9 @@ const mapStateToProps = ({ questions, authentication, users }) => ({
     users
 })
 
-export default connect(mapStateToProps)(QuestionDetails)
+const mapDispatch = dispatch => ({
+    editAnswer: (a) => dispatch(addAnswer(a))
+})
+
+export default connect(mapStateToProps, mapDispatch)(QuestionDetails)
 

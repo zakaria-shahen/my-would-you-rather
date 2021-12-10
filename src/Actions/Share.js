@@ -1,4 +1,4 @@
-import { _getQuestions, _getUsers, _saveQuestionAnswer } from '../API/_DATA'
+import { _getQuestions, _getUsers, _saveQuestionAnswer, _removeQuestionAnswer } from '../API/_DATA'
 import { loadQuestions } from './Question'
 import { loadUsers } from './Users'
 
@@ -31,7 +31,7 @@ export function load() {
 
 export const addAnswer = answer => reducer => {
     reducer(addAnswerFormat(answer))
-    
+
     _saveQuestionAnswer(answer).catch((error) => {
         alert("Add Answer Error: try agin... ", error)
         removeAnswer(answer)
@@ -39,8 +39,11 @@ export const addAnswer = answer => reducer => {
 
 }
 
-const removeAnswer = answer => reducer => reducer(removeAnswerFormat(answer))
+const removeAnswer = answer => reducer =>
+    _removeQuestionAnswer(answer).then(() => reducer(removeAnswerFormat(answer)))
 
 
-// const editAnswer = answer => reducer => _removeQuestionAnswer(answer)
+export const editAnswer = answer => dispatch => {
+    dispatch(removeAnswer(answer)).then(() => dispatch(addAnswer(answer)))
+}
 

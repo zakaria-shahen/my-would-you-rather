@@ -1,14 +1,13 @@
-import { useState } from 'react'
+import { useState, forwardRef } from 'react'
 import { connect } from 'react-redux'
 import { PropTypes, } from 'prop-types'
-import { addAnswer } from '../Actions/Share'
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
+import { addAnswer, editAnswer } from '../Actions/Share'
 
 import {
     Radio, RadioGroup, FormControlLabel,
-    FormControl, FormLabel, Button, Box,
-    Avatar
+    FormLabel, Button, Box,
 } from '@mui/material'
 
 
@@ -23,16 +22,23 @@ const cssStyle = {
 
 const Question = props => {
     const [answer, setAnswer] = useState(props.ifAnswer ? props.ifAnswer : "")
-    const handleRadio = ({ target }) => setAnswer(target.value)
-
-    const navigate = useNavigate()
+    const handleRadio = ({ target }) => !props.ifAnswer && setAnswer(target.value)
 
     const handleSubmit = event => {
         event.preventDefault()
-        const { authedUser, question, addAnswer } = props
+        const { authedUser, question, addAnswer, editAnswer } = props
 
         if (!answer) {
             alert("Not input")
+            return
+        }
+
+        if (props.ifAnswer) {
+            editAnswer({
+                authedUser,
+                qid: question.id,
+                answer
+            })
             return
         }
 
@@ -44,46 +50,54 @@ const Question = props => {
         })
     }
 
-    const HandleDetails = event => {
-        event.preventDefault()
-        navigate(`/question/${props.question.id}`)
-
-    }
+    const ButtonRouter = forwardRef((props, ref) => (
+        <Link ref={ref}  {...props} />
+    ))
 
     return (
-        <Box component="form" sx={cssStyle} onSubmit={handleSubmit}>
-            <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
+        <Box component="form" sx={{ ...cssStyle, p: 3 }} >
+            <FormLabel sx={{ fontSize: "21px", ml: "30%" }}>Would You Rather..</FormLabel>
+            <RadioGroup aria-label="Would You Rather.." onChange={handleRadio}  >
+                <FormControlLabel
+                    checked={answer === "optionOne"}
+                    value="optionOne"
+                    control={<Radio />} label={props.question.optionOne.text} />
 
-                {props.username && (
-                    <>
-                        <Avatar alt={props.username} src={props.avatarURL} />
-                    </>
-
+                {props.ifAnswer && (
+                    <div>Votes: {props.question.optionOne.votes.length}</div>
                 )}
 
-                <FormLabel component="legend">Would You Rather..</FormLabel>
-                <RadioGroup aria-label="Would You Rather.." onChange={handleRadio}  >
-                    <FormControlLabel checked={answer === "optionOne"} value="optionOne" control={<Radio />} label={props.question.optionOne.text} />
-                    {props.ifAnswer && (
-                        <div>{props.question.optionOne.votes.length}</div>
-                    )}
-                    <FormControlLabel checked={answer === "optionTwo"} value="optionTwo" control={<Radio />} label={props.question.optionTwo.text} />
-                    {props.ifAnswer && (
-                        <div>{props.question.optionTwo.votes.length}</div>
-                    )}
+                <FormControlLabel
+                    checked={answer === "optionTwo"}
+                    value="optionTwo"
+                    control={<Radio />} label={props.question.optionTwo.text} />
 
-                </RadioGroup>
+                {props.ifAnswer && (
+                    <div>Votes: {props.question.optionTwo.votes.length}</div>
+                )}
 
-                <div style={{ display: "flex", width: "400px" }}>
-                    <Button fullWidth sx={{ flexGrow: 1, mt: 1, mr: 1 }} type="submit" variant="outlined">
-                        {props.ifAnswer ? "Edit Vote" : "Vote"}
-                    </Button>
-                    {/* TODO: Change Component  */}
+            </RadioGroup>
 
-                    <Button onClick={HandleDetails} fullWidth sx={{ flexGrow: 1, mt: 1, mr: 1 }} variant="outlined">details</Button>
+            <Box sx={{ display: "flex", width: "400px", justifyContent: "center", mt: 2, a: { flexGrow: 1, pt: 1, ml: 2 } }}>
+                {
+                    !props.ifAnswer && (
+                        <Button
+                            onClick={handleSubmit}
+                            fullWidth
+                            variant="outlined">
+                            {props.ifAnswer ? "Edit Vote" : "Vote"}
+                        </Button>
+                    )
+                }
 
-                </div>
-            </FormControl>
+                <Button
+                    component={ButtonRouter}
+                    to={`/question/${props.question.id}`}
+                    fullWidth
+                    variant="outlined">
+                    details
+                </Button>
+            </Box>
         </Box>
 
     )
@@ -115,10 +129,10 @@ const mapPropsToState = (state, ownerProps) => {
     }
 }
 
-const mapDispatch = dispatch => ({ addAnswer: (a) => dispatch(addAnswer(a)) })
+const mapDispatch = dispatch => ({
+    addAnswer: (a) => dispatch(addAnswer(a)),
+    editAnswer: (a) => dispatch(editAnswer(a))
+})
 
 
 export default connect(mapPropsToState, mapDispatch)(Question)
-
-
-

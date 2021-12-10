@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import { connect } from 'react-redux'
-import { newUser } from '../Actions/Users'
-import { useNavigate } from  'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import {
     Box, FormControl, FormLabel,
     TextField, Button
 } from '@mui/material'
+import { newUser } from '../Actions/Users'
 
 
 const NewUser = props => {
@@ -25,9 +26,9 @@ const NewUser = props => {
             return
         }
 
-        props.dispatch(newUser(user))
+        props.newUser(user)
         navigate("/")
-        
+
     }
 
     const handelInput = ({ target }) => setUser(user => ({ ...user, [target.id]: target.value }))
@@ -58,4 +59,11 @@ const NewUser = props => {
     )
 }
 
-export default connect()(NewUser)
+
+NewUser.propTypes = {
+    newUser: PropTypes.func.isRequired
+}
+
+const mapDispatch = dispatch => ({ newUser: (a) => dispatch(newUser(a)) })
+
+export default connect(null, mapDispatch)(NewUser)
