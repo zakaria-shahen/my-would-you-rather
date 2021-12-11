@@ -1,7 +1,7 @@
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, Navigate } from 'react-router-dom'
 import { useState } from 'react'
 import { connect } from 'react-redux'
-import { PropTypes, } from 'prop-types'
+import { PropTypes } from 'prop-types'
 
 
 import {
@@ -26,26 +26,22 @@ const cssStyle = {
 
 
 const QuestionDetails = props => {
-    const navigate = useNavigate()
     const params = useParams()
     const qid = params.id
-
     const { questions, users, editAnswer, authentication } = props
-    const question = questions[qid]
 
+    const [answer] = useState(users[authentication].answers[qid])
+    // const [answer, setAnswer] = useState(users[authentication].answers[qid])
+    // const handleRadio = ({ target }) => setAnswer(target.value)
+
+    const question = questions[qid]
     if (!question) {
-        navigate('/NotFoundQuestion')
+        return <Navigate to='/NotFoundQuestion' replace={true} />
     }
 
     const author = users[question.author]
     const { optionOne, optionTwo } = question
     const totalVotes = (optionOne.votes.length + optionTwo.votes.length) / 100
-
-
-
-    const [answer] = useState(users[authentication].answers[qid])
-    // const [answer, setAnswer] = useState(users[authentication].answers[qid])
-    // const handleRadio = ({ target }) => setAnswer(target.value)
 
     const handleSubmit = event => {
         event.preventDefault()
