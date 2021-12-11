@@ -92,7 +92,7 @@ const Question = props => {
 
                 <Button
                     component={ButtonRouter}
-                    to={`/question/${props.question.id}`}
+                    to={`/questions/${props.question.id}`}
                     fullWidth
                     variant="outlined">
                     details

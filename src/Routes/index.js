@@ -23,7 +23,7 @@ const AppRouter = props => {
                 <Route path="/" element={<ProtectedRouter children={<Home />} />} />
                 <Route path="/Add" element={<ProtectedRouter children={<Add />} />} />
                 <Route path="/LeaderBoard" element={<ProtectedRouter children={<LeaderBoard />} />} />
-                <Route path="/question/:id" element={<ProtectedRouter children={<QuestionDetails />} />} />
+                <Route path="/questions/:id" element={<ProtectedRouter children={<QuestionDetails />} />} />
 
 
                 {/* Public  */}
