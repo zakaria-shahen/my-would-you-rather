@@ -1,6 +1,3 @@
-
-<!-- [Demo Video](https://www.youtube.com/watch?v=xfmSkLAL__Q) -->
-
 # My Would You Rather (redux, react,..) 
 website to vote for questions
 This project is an application of what you learned in 
@@ -16,21 +13,22 @@ A site to vote on questions contains the following features
 - add user 
 - loading view
 
-## Routers
-- `/`
-   - `/add`
-   - `/LeaderBoard`
-   - `/questions:id`
-   - `/newUser`
-- `/404`
-
-
 ## How to using
 
 ```sh
 npm install
 npm start
 ```
+
+## Routers
+- `/`
+   - `/Login`
+   - `/add`
+   - `/LeaderBoard`
+   - `/questions:id`
+   - `/newUser`
+- `/404`
+
 
 ## Components 
 
@@ -62,12 +60,10 @@ const store = {
 
 ```
 
-## Action
+## Action (redux)
 - Users
 1. LOAD_USERS
-2. soon
-   1. ADD_USERS or NEW_USER
-  
+2. NEW_USER
   
 - Question
 1. LOAD_QUESTIONS
@@ -78,6 +74,14 @@ const store = {
 1. LOGIN
 2. LOGOUT
 
+- Share
+1. ADD_ANSWER
+1. REMOVE_ANSWER
+
+
+
+
+
 <!-- - Share 
 1. ADD_ANSWER
 2. REMOVE_ANSWER
@@ -85,3 +89,7 @@ const store = {
 4. removeAnswer()
 5. load()
    -->
+
+
+
+<!-- [Demo Video](https://www.youtube.com/watch?v=xfmSkLAL__Q) -->
